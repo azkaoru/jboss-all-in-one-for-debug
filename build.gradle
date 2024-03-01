@@ -1,0 +1,25 @@
+plugins {
+   id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation fileTree(dir:"$project.properties.jbossModuleHome", include: "**/*.jar")
+}
+
+jar {
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+task createJar(type: Jar) {
+    setProperty("zip64", true)
+    archiveBaseName = 'jboss-all-in-one-for-debug'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
