@@ -18,7 +18,7 @@ jar {
 
 task createJar(type: Jar) {
     setProperty("zip64", true)
-    archiveBaseName = 'jboss-all-in-one-for-debug'
+    archiveBaseName = 'jboss-all-in-one-for-debug-1.0'
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
